@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genre index{% endblock %}
+
+{% block body %}
+    <h1>Genre index</h1>
+    <input class="form-control" id="name" name="name" type="text"> <br>
+    <input class="btn btn-primary" onclick="send()" type="submit" value="Find by name">
+
+    <script>
+        function send() {
+            let name = document.getElementById("name").value;
+            let url = 'http://localhost:8000/Genre';
+            if(name !== undefined && name !== ''){
+                url = `http://localhost:8000/Genre/find/${name}`;
+            }
+                window.location = url;
+        }
+    </script>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Buttons</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Genre in Genres %}
+            <tr>
+                <td>{{ Genre.id }}</td>
+                <td>{{ Genre.name }}</td>
+                <td>
+                    <a href="{{ path('Genre_show', {'id': Genre.id}) }}">show</a>
+                    <a href="{{ path('Genre_edit', {'id': Genre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('Genre_new') }}">Create new</a>
+{% endblock %}

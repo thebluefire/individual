@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block body %}
+    <h1>Edit Book</h1>
+
+    {{ include('Book/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('Book_index') }}">back to list</a>
+
+    {{ include('Book/_delete_form.html.twig') }}
+{% endblock %}

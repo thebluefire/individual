@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book index{% endblock %}
+
+{% block body %}
+    <h1>Book index</h1>
+    <input class="form-control" id="name" name="name" type="text"> <br>
+    <input class="btn btn-primary" onclick="send()" type="submit" value="Find by name">
+
+    <script>
+        function send() {
+            let name = document.getElementById("name").value;
+            let url = 'http://localhost:8000/Book';
+            if(name !== undefined && name !== ''){
+                url = `http://localhost:8000/Book/find/${name}`;
+            }
+                window.location = url;
+            
+        }
+    </script>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Genre</th>
+                <th>Buttons</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Book in Books %}
+            <tr>
+                <td>{{ Book.id }}</td>
+                <td>{{ Book.name }}</td>
+                <td>{{ Book.price }}</td>
+                <td>{{ Book.genre }}</td>
+                <td>
+                    <a class="btn" href="{{ path('Book_show', {'id': Book.id}) }}">show</a>
+                    <a class="btт" href="{{ path('Book_edit', {'id': Book.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('Book_new') }}">Create new</a>
+{% endblock %}
