@@ -2,21 +2,16 @@
 
 
 # db creation
-```
-create database arby_db;
-use arby_db;
-create table component(
-    id int not null AUTO_INCREMENT primary key,
-    name nvarchar(255) not null,
-    price int null, 
-    description text null,
-    product int null
+
+create database my_db;
+use my_db;
+create table book(
+id int not null AUTO_INCREMENT primary key,
+name nvarchar(255) not null,
+price int null, 
+genre_id int null
 );
-create table product(
-    id int not null AUTO_INCREMENT primary key,
-    name nvarchar(255) not null,
-    price int null, 
-    description text null,
-    warranty int null 
+create table genre(
+id int not null AUTO_INCREMENT primary key,
+name nvarchar(255) not null
 );
-```
